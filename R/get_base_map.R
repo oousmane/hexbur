@@ -9,12 +9,14 @@
 #'
 #' @examples
 #' # Plot the map
+#' \dontrun{
 #'library(sf)
 #'library(tidyverse)
 #'
 #' # get hex map
 #' hex_bf <-hex_map() # No argument, need internet connection.
 #' ggplot(hex_bf)+geom_sf() # Quick visualization
+#' }
 #' @export
 hex_map <-function(){
   hex <- sf::read_sf('https://github.com/oousmane/hexburdb/raw/main/map/hex_grid.gpkg')

@@ -1,4 +1,4 @@
-#' Add static data layers 
+#' Add static data layers
 #'
 #'Add static data layer (not updated from year to year), based on the spatial grid of the map obtained by the get_map() function
 #'
@@ -6,9 +6,11 @@
 #'
 #' @return a tibble with the hexagon number ("hex_id" column) and the selected features values
 #' @import sf
-#' @import tidyverse
-#' 
-#' @references 
+#' @import dplyr
+#' @import readr
+#' @import tibble
+#'
+#' @references
 #' - Soil features from [SoilGrids](https://soilgrids.org/)
 #' - Crop distribution from the Land-Parcel Identification System ([Registre Parcellaire Graphique](https://www.data.gouv.fr/fr/datasets/registre-parcellaire-graphique-rpg-contours-des-parcelles-et-ilots-culturaux-et-leur-groupe-de-cultures-majoritaire/) in France) of the European Common Agricultural Policy
 #' - Organic crop distribution from [Agence Bio](https://www.data.gouv.fr/fr/datasets/parcelles-en-agriculture-biologique-ab-declarees-a-la-pac/)
@@ -17,14 +19,15 @@
 #'
 #' @examples
 #'# Get soil features and plot clay content
+#'\dontrun{
 #'library(sf)
 #'library(tidyverse)
 #'
 #'get_map()%>%
 #'   left_join(get_static_layer("soil"))%>%
 #'   ggplot()+
-#'   geom_sf(aes(fill=clay_0to30cm_percent)) 
-#' 
+#'   geom_sf(aes(fill=clay_0to30cm_percent))
+#'}
 #' @export
 get_static_layer<-function(layer){
   tb<-tibble(
@@ -41,8 +44,8 @@ get_static_layer<-function(layer){
     )
   )%>%
     filter(name==layer)
-  
+
   ext<-read_csv(tb$url)
-  
+
   return(ext)
 }
