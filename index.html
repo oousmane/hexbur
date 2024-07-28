@@ -51,6 +51,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 <p>The goal of hexbur is to provides several layers of information for Burkina Faso, useful for agricultural systems analysis and more.</p>
+<p><code>hexbur</code>is a lighweight package that provide hexagonal grid of about 340 km^2. The original idea of this work belongs to <a href="https://github.com/BjnNowak" class="external-link">@BjnNowak</a>.Benjamin, Thanks for building <a href="https://github.com/BjnNowak/frex" class="external-link"><code>frex</code></a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -60,24 +61,113 @@
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"oousmane/hexbur"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="basic-hex-grids-plot">Basic hex grids plot<a class="anchor" aria-label="anchor" href="#basic-hex-grids-plot"></a>
 </h2>
 <p>The package is based on a hexagonal grid of Burkina Faso, to which data layers can be added. This grid may be loaded as follows, using the <code><a href="reference/hex_map.html">hex_map()</a></code> function</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/oousmane/hexbur" class="external-link">hexbur</a></span><span class="op">)</span></span>
-<span><span class="va">hex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hex_map.html">hex_map</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># with no args.</span></span></code></pre></div>
-<p>A very quick viz of hex grids can be performed using <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> and for sure the <a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/oousmane/hexbur" class="external-link">hexbur</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span></span>
 <span><span class="va">hex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/hex_map.html">hex_map</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># with no args.</span></span>
+<span><span class="va">hex</span></span>
+<span><span class="co">#&gt; Simple feature collection with 906 features and 1 field</span></span>
+<span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
+<span><span class="co">#&gt; Dimension:     XY</span></span>
+<span><span class="co">#&gt; Bounding box:  xmin: -5.511255 ymin: 9.415337 xmax: 2.407427 ymax: 15.08311</span></span>
+<span><span class="co">#&gt; Geodetic CRS:  WGS 84</span></span>
+<span><span class="co">#&gt; # A tibble: 906 × 2</span></span>
+<span><span class="co">#&gt;    hex_id                                                                   geom</span></span>
+<span><span class="co">#&gt;     &lt;int&gt;                                                     &lt;MULTIPOLYGON [°]&gt;</span></span>
+<span><span class="co">#&gt;  1      1 (((-5.421255 10.32259, -5.421255 10.40261, -5.50264 10.4496, -5.50263…</span></span>
+<span><span class="co">#&gt;  2      2 (((-5.464444 10.58552, -5.421255 10.61045, -5.421255 10.71438, -5.459…</span></span>
+<span><span class="co">#&gt;  3      3 (((-5.44708 10.90732, -5.421255 10.92222, -5.421255 11.02614, -5.4881…</span></span>
+<span><span class="co">#&gt;  4      4 (((-5.50264 10.4496, -5.421255 10.40261, -5.331255 10.45457, -5.33125…</span></span>
+<span><span class="co">#&gt;  5      5 (((-5.459337 10.73637, -5.421255 10.71438, -5.331255 10.76634, -5.331…</span></span>
+<span><span class="co">#&gt;  6      6 (((-5.488173 11.06478, -5.421255 11.02614, -5.331255 11.07811, -5.331…</span></span>
+<span><span class="co">#&gt;  7      7 (((-5.331255 11.80052, -5.331255 11.80557, -5.352185 11.81766, -5.354…</span></span>
+<span><span class="co">#&gt;  8      8 (((-5.241255 10.31451, -5.241255 10.40261, -5.331255 10.45457, -5.421…</span></span>
+<span><span class="co">#&gt;  9      9 (((-5.241255 10.61045, -5.241255 10.71438, -5.331255 10.76634, -5.421…</span></span>
+<span><span class="co">#&gt; 10     10 (((-5.241255 10.92222, -5.241255 11.02614, -5.331255 11.07811, -5.421…</span></span>
+<span><span class="co">#&gt; # ℹ 896 more rows</span></span></code></pre></div>
+<p><code><a href="reference/hex_map.html">hex_map()</a></code> returns an <code>sf</code> object(spatial).</p>
+<p>A very quick viz of hex grids can be performed using <a href="https://r-spatial.github.io/sf/" class="external-link">sf</a> and for sure the <a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a>,</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Simple hex grid map </span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">geom_sf</span><span class="op">(</span>data <span class="op">=</span> <span class="va">hex</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-warning-1.png" width="100%"></p>
+<p>This a beautiful plot of hex grids. R can handle spatial data and produce beautiful maps. We can add, the border of country and make things prettier. <code>admin0_map()</code>,<code>admin1_map()</code>, <code>admin2_map()</code>and <code>admin3_map()</code> function allow you to download administrative boundary of Burkina Faso. These boundaries is distributed par <a href="https://data.humdata.org" class="external-link">Humanitarian Data Exchange (HDX)</a>. Below a better map of Burkina hex grid.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">admin0</span> <span class="op">&lt;-</span> <span class="fu">admin0_map</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_sf</span><span class="op">(</span>data <span class="op">=</span> <span class="va">hex</span>, color <span class="op">=</span> <span class="st">"grey90"</span>,fill<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_sf</span><span class="op">(</span>data <span class="op">=</span> <span class="va">admin0</span>,fill <span class="op">=</span> <span class="cn">NA</span>,lwd<span class="op">=</span><span class="fl">.5</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">theme_void</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%"></p>
+</div>
+<div class="section level2">
+<h2 id="add-static-layer">Add static layer<a class="anchor" aria-label="anchor" href="#add-static-layer"></a>
+</h2>
+<p><code>hexbur</code> provides access to static and dynamic layer data. For now, only soil texture is supported (static layer). We will add further data layers as soon as possible.</p>
+<p>The soil information (texture) comes from FAO HWSDv2, but we mad frequential analysis to determine dominant soil for each hex grid for 6 depths noted D1 to D6. Here is how to download soil information.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get soil usda texture data</span></span>
+<span></span>
+<span><span class="va">hwsd</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_static_layer.html">get_static_layer</a></span><span class="op">(</span>layer<span class="op">=</span><span class="st">"soil"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">hwsd_sf</span> <span class="op">&lt;-</span> <span class="fu">left_join</span><span class="op">(</span><span class="va">hex</span>,<span class="va">hwsd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">hwsd_sf</span> <span class="op">&lt;-</span> <span class="va">hwsd_sf</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span></span>
+<span>    <span class="fu">across</span><span class="op">(</span></span>
+<span>      .cols <span class="op">=</span> <span class="fu">starts_with</span><span class="op">(</span><span class="st">"D"</span><span class="op">)</span>,</span>
+<span>      .fns <span class="op">=</span> <span class="va">num_to_usda</span> <span class="co"># convert num to usda abreviation</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu">relocate</span><span class="op">(</span><span class="va">geom</span>, .after <span class="op">=</span> <span class="fu">everything</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">hwsd_sf</span><span class="op">)</span></span>
+<span><span class="co">#&gt; sf [906 × 8] (S3: sf/tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ hex_id: num [1:906] 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;  $ D1    : chr [1:906] "SaClLo" "SaClLo" "SaClLo" "SaClLo" ...</span></span>
+<span><span class="co">#&gt;  $ D2    : chr [1:906] "SaLo" "SaLo" "Cl" "SaLo" ...</span></span>
+<span><span class="co">#&gt;  $ D3    : chr [1:906] "SaLo" "SaLo" "Cl" "SaLo" ...</span></span>
+<span><span class="co">#&gt;  $ D4    : chr [1:906] "SaLo" "SaLo" "Cl" "SaLo" ...</span></span>
+<span><span class="co">#&gt;  $ D5    : chr [1:906] "SaLo" "SaLo" "Cl" "SaLo" ...</span></span>
+<span><span class="co">#&gt;  $ D6    : chr [1:906] "SaLo" "SaLo" "Cl" "SaLo" ...</span></span>
+<span><span class="co">#&gt;  $ geom  :sfc_MULTIPOLYGON of length 906; first list element: List of 1</span></span>
+<span><span class="co">#&gt;   ..$ :List of 1</span></span>
+<span><span class="co">#&gt;   .. ..$ : num [1:356, 1:2] -5.42 -5.42 -5.5 -5.5 -5.5 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "class")= chr [1:3] "XY" "MULTIPOLYGON" "sfg"</span></span>
+<span><span class="co">#&gt;  - attr(*, "sf_column")= chr "geom"</span></span>
+<span><span class="co">#&gt;  - attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA NA NA NA NA NA</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:7] "hex_id" "D1" "D2" "D3" ...</span></span></code></pre></div>
+<p>With this dataset, we can visualize the distribution of soil texture for the first depth D1 (0-20 cm). Here how:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_sf</span><span class="op">(</span>data <span class="op">=</span> <span class="va">hwsd_sf</span>,<span class="fu">aes</span><span class="op">(</span>fill<span class="op">=</span><span class="va">D1</span><span class="op">)</span>,color<span class="op">=</span><span class="st">"grey95"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">scale_fill_manual</span><span class="op">(</span></span>
+<span>    values <span class="op">=</span> <span class="fu">hwsd_cols</span><span class="op">(</span><span class="op">)</span>,<span class="co"># function to provide convenient colors for soil</span></span>
+<span>    na.value <span class="op">=</span> <span class="st">"grey"</span></span>
+<span>  <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_sf</span><span class="op">(</span>data <span class="op">=</span> <span class="va">admin0</span>,fill <span class="op">=</span> <span class="cn">NA</span>,lwd<span class="op">=</span><span class="fl">.5</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">guides</span><span class="op">(</span></span>
+<span>    fill <span class="op">=</span> <span class="fu">guide_legend</span><span class="op">(</span></span>
+<span>      position <span class="op">=</span> <span class="st">"bottom"</span>,</span>
+<span>      title <span class="op">=</span> <span class="st">"Texture du sol, couche D1 (0-20 cm)"</span>,</span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Type de sol dominant au Burkina Faso"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="st">"HWSD V2 | Grille hexagonale"</span></span>
+<span>  <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">theme_void</span><span class="op">(</span></span>
+<span>  <span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span></span>
+<span>    legend.title.position <span class="op">=</span> <span class="st">"top"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-4-1.png" width="100%"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
